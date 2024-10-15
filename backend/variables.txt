@@ -1,0 +1,67 @@
+Här är en sammanställning av variabler som används i din backend-kod och vad de används till. Jag har delat upp dem baserat på olika funktioner och delar av koden:
+
+Globala variabler:
+
+app: Skapar en Express-applikation.
+Används för att definiera och konfigurera backend-servern, hantera routes och middleware.
+
+port: Anger vilken port Express-applikationen ska köras på.
+Standardvärdet är 3001 i ditt fall.
+
+users: En array som innehåller användardata från ./data/users.
+Denna array används för att lagra och hämta användaruppgifter som namn, email, kurser, etc.
+
+loginData: En array som innehåller simulerad login-data från ./data/loginData.
+Den innehåller uppgifter som användarnamn, lösenordshash, och roll (t.ex. "manager" eller "user").
+
+User: Typen för en användare som definieras i ./types/types.
+Används för att skapa och typbestämma användarobjekt.
+
+validatePassword: En funktion som använder bcrypt för att jämföra ett okrypterat lösenord med en hash.
+Används för att validera användarens inmatade lösenord under inloggningen.
+
+Variabler i Routes (API endpoints)
+GET /users
+
+req (Request): Innehåller begäran från klienten. Används här för att hantera HTTP GET-anropet.
+res (Response): Används för att skicka ett svar tillbaka till klienten. Här används res.json för att skicka tillbaka users-arrayen.
+
+users: Variabeln används här för att skicka tillbaka alla användare till klienten.
+POST /login
+
+name: Extraheras från req.body. Det är det användarnamn som användaren försöker logga in med.
+
+password: Extraheras också från req.body. Det är det lösenord som användaren har matat in vid inloggningen.
+
+user: En variabel som lagrar användaruppgifter från loginData, om ett användarnamn matchas.
+Används för att validera lösenord och tilldela användaren en inloggningsstatus.
+
+isMatch: Ett boolean-värde som returneras av validatePassword, vilket anger om lösenordet är korrekt.
+
+foundUser: En variabel som söker upp användaren i users-arrayen och uppdaterar lastLogin om inloggningen lyckas.
+Detta uppdaterar användarens senaste inloggningstid.
+
+GET /users/
+
+userId: Hämtas från URL-parametern (t.ex. /users/4). Det är ID
+för den användare som ska hämtas.
+
+user: En variabel som lagrar den användare som matchar det angivna ID
+från users-arrayen.
+
+Om en användare med det angivna ID
+inte finns returneras ett 404-fel.
+Sammanfattning av Variabler och Syften:
+app: Express-applikationen (servern).
+port: Porten som servern körs på (3001).
+users: En array som lagrar användare och deras information.
+loginData: Innehåller simulerad inloggningsdata (användarnamn, lösenord).
+validatePassword: En funktion för att validera användarens lösenord med bcrypt.
+name: Användarnamn från inloggningsförfrågan.
+password: Lösenord från inloggningsförfrågan.
+user: En användare som matchar det inmatade användarnamnet i inloggningen.
+isMatch: Resultatet av lösenordsvalideringen.
+foundUser: En användare från users-arrayen som hittats vid inloggningen.
+userId: ID
+för en specifik användare i /users/:id-route.
+Om du vill fortsätta med andra delar av din applikation (som frontend) kan vi göra samma sak där!
